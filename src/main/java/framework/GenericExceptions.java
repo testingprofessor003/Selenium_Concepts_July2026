@@ -1,7 +1,8 @@
 package framework;
 
-import lombok.experimental.StandardException;
-
-@StandardException
 public class GenericExceptions extends RuntimeException {
+    
+    public GenericExceptions(String message) {
+        super(message);
+    }    
 }
