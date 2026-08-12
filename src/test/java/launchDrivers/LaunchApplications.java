@@ -21,7 +21,7 @@ public class LaunchApplications {
         // Launching Google Application
         // driver.get("https://www.google.com");
 
-        SeleniumUtils seleniumUtils = new SeleniumUtils(driver);
+        SeleniumUtils seleniumUtils = new SeleniumUtils(driver,null);
         seleniumUtils.launchApplication("https://www.google.com");
     }
 }
