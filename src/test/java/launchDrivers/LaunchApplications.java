@@ -15,10 +15,10 @@ public class LaunchApplications {
         //WebDriver driver = new ChromeDriver();
         WebDriver driver = BrowserUtils.getDriver(BrowserTypes.CHROME);
 
-        // //Maximizing the window
+        // Maximizing the window
         // driver.manage().window().maximize();
 
-        // //Launching Google Application
+        // Launching Google Application
         // driver.get("https://www.google.com");
 
         SeleniumUtils seleniumUtils = new SeleniumUtils(driver);

@@ -4,9 +4,9 @@ package framework.constants;
 public enum BrowserTypes {
 
     //Every enum value is of static final object
-    CHROME, //BrowserTypes.CHROME --> BrowserTypes.CHROME.name() --> "CHROME"
-    FIREFOX, //BrowserTypes.FIREFOX --> BrowserTypes.FIREFOX.name() --> "FIREFOX"
-    EDGE, //BrowserTypes.EDGE --> BrowserTypes.EDGE.name() --> "EDGE"
-    SAFARI; //BrowserTypes.SAFARI --> BrowserTypes.SAFARI.name() --> "SAFARI"
+    CHROME, //static final BrowserTypes.CHROME --> BrowserTypes.CHROME.name() --> "CHROME"
+    FIREFOX, //static final BrowserTypes.FIREFOX --> BrowserTypes.FIREFOX.name() --> "FIREFOX"
+    EDGE, //static final BrowserTypes.EDGE --> BrowserTypes.EDGE.name() --> "EDGE"
+    SAFARI; //static final BrowserTypes.SAFARI --> BrowserTypes.SAFARI.name() --> "SAFARI"
 
 }
