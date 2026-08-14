@@ -73,6 +73,45 @@ public class SeleniumUtils {
         return this;
     }
 
+    /*
+        Accepting the Browser Based Alerts
+     */
+    public SeleniumUtils acceptAlert()
+    {
+        PathUtils.applySleep(3);
+        driver.switchTo().alert().accept();
+        return this;
+    }
+
+    /*
+        Dismissing the Alerts
+     */
+    public SeleniumUtils dismissAlert()
+    {
+        PathUtils.applySleep(3);
+        driver.switchTo().alert().dismiss();
+        return this;
+    }
+
+    /*
+        Fetching the text from the alerts
+     */
+    public String getAlertText()
+    {
+        return driver.switchTo().alert().getText();
+    }
+
+    /*
+        Entering the data inside the pop up
+     */
+    public SeleniumUtils enterDataInsideAlertBox(String data)
+    {
+        driver.switchTo().alert().sendKeys(data);
+        PathUtils.applySleep(3);
+        acceptAlert();
+        return this;
+    }
+
 
 
 

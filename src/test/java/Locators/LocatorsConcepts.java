@@ -48,6 +48,23 @@ public class LocatorsConcepts extends BaseClass {
         {
             throw new GenericExceptions("Element not found for close button");
         }
+
+        By btn_ShowAlert=By.xpath("//button[text()='Show Alert']");
+        By btn_ShowConfirm=By.xpath("//button[text()='Show Confirm']");
+        By btn_ShowPrompt=By.xpath("//button[text()='Show Prompt']");
+
+        seleniumUtils.performAction(SeleniumActions.CLICK, btn_ShowAlert)
+                .acceptAlert()
+                .performAction(SeleniumActions.CLICK,btn_ShowConfirm)
+                .dismissAlert()
+                .performAction(SeleniumActions.CLICK,btn_ShowPrompt)
+                .enterDataInsideAlertBox("Sample Data");
+
+        By btn_ShowAlertSequence=By.xpath("//button[text()='Show Alert Sequence']");
+        seleniumUtils.performAction(SeleniumActions.CLICK, btn_ShowAlertSequence)
+                .acceptAlert()
+                .acceptAlert()
+                .acceptAlert();
     }
 
 }
