@@ -52,6 +52,16 @@ public class SeleniumUtils {
         };
     }
 
+    public SeleniumUtils pageNavigations(String navigation)
+    {
+        switch (navigation.toUpperCase())
+        {
+            case "BACK" -> driver.navigate().back();
+            case "FORWARD" -> driver.navigate().forward();
+            case "REFRESH" -> driver.navigate().refresh();
+        }
+        return this;
+    }
     public SeleniumUtils performAction(SeleniumActions actions, By by, String... data)
     {
         switch (actions) {
