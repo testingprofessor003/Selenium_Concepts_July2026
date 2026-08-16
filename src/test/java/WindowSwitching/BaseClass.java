@@ -28,7 +28,7 @@ public class BaseClass {
     public void beforeMethod()
     {
         if(seleniumUtils.getRequiredInformationFromDriver("URL").contains("data"))
-        seleniumUtils.launchApplication("https://seleniumsessions.testingprofessor.net/");
+        seleniumUtils.launchApplication("https://www.cricbuzz.com/");
 
     }
 }
