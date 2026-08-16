@@ -37,15 +37,10 @@ public class DoubleClickConcepts extends BaseClass {
 
         doubleClickAndFillData.forEach(element -> {
             a1.pause(1000).doubleClick(element).build().perform();
-
             a1.pause(1000)
                     .click(elementUtils.findElement(
                             By.xpath("//input[starts-with(@data-testid,'rename-input') and @value]")
                     ))
-                    .keyDown(Keys.CONTROL)
-                    .sendKeys("a")
-                    .keyUp(Keys.CONTROL)
-                    .sendKeys(Keys.DELETE)
                     .pause(1000)
                     .sendKeys(elementUtils.findElement(By.xpath("//input[starts-with(@data-testid,'rename-input') and @value]")),"Sample Informations")
                     .pause(1000)
