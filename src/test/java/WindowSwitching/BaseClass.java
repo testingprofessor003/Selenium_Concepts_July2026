@@ -31,4 +31,7 @@ public class BaseClass {
         seleniumUtils.launchApplication("https://www.cricbuzz.com/");
 
     }
+
+    //Xpath for finding the players:
+    //h1[text()='playing XI']/following-sibling::div//a/div/div/div[contains(@class,'items-center') and contains(@class,'justify-start')]/span[not(@class)]
 }
