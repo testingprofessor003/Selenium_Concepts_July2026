@@ -41,5 +41,11 @@ public class MouseHoverCascade extends BaseClass {
             a1.pause(1000).moveToElement(element).build().perform();
         });
 
+        List<WebElement> ratings=elementUtils.findElements(By.xpath("//h4[text()='Precision Star Rating']/following-sibling::div/*[name()='svg']"));
+
+        ratings.forEach(element->{
+            a1.pause(1000).moveToElement(element).build().perform();
+        });
+
     }
 }
