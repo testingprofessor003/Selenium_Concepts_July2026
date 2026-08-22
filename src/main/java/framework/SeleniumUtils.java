@@ -2,8 +2,16 @@ package framework;
 import framework.constants.SeleniumActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Sleeper;
 
 public class SeleniumUtils {
     
@@ -67,6 +75,7 @@ public class SeleniumUtils {
         switch (actions) {
             case CLICK -> click(by);
             case ENTER_DATA -> enterData(by,data[0]);
+            case DROPDOWN -> selectOptionFromDropDown(by,data);
         }
         return this;
     }
@@ -122,6 +131,38 @@ public class SeleniumUtils {
         return this;
     }
 
+    private SeleniumUtils selectOptionFromDropDown(By by,String... option)
+    {
+        Select s1=new Select(elementUtils.findElement(by));
+
+        if(option.length==0) //Selects a random option from the drop-down
+        {
+            List<WebElement> elements=s1.getOptions();
+
+            int number= ThreadLocalRandom.current().nextInt(0,elements.size()-1);
+
+            s1.selectByIndex(number);
+        }
+
+        else
+        {
+            Arrays.asList(option).forEach(options-> {
+                if (s1.getOptions().stream().map(s -> s.getText()).filter(s -> s.equalsIgnoreCase(options))
+                        .findAny().isPresent()) {
+                    s1.selectByVisibleText(options);
+                } else if (s1.getOptions().stream().map(s -> s.getText()).filter(s -> s.contains(options)).findAny().isPresent()) {
+                    s1.selectByContainsVisibleText(options);
+                } else if (s1.getOptions().stream().map(s -> s.getAttribute("value")).filter(s -> s.equalsIgnoreCase(options)).findAny().isPresent()) {
+                    s1.selectByValue(options);
+                } else {
+                    s1.selectByIndex(Integer.parseInt(options));
+                }
+            });
+
+        }
+
+        return this;
+    }
 
 
 

@@ -28,8 +28,7 @@ public class BaseClass {
     public void beforeMethod()
     {
         if(seleniumUtils.getRequiredInformationFromDriver("URL").contains("data"))
-        seleniumUtils.launchApplication("https://www.cricbuzz.com/");
-
+        seleniumUtils.launchApplication("https://seleniumsessions.testingprofessor.net/");
     }
 
     //Xpath for finding the players:
