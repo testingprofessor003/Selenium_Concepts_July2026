@@ -13,6 +13,7 @@ public class BaseClass {
     protected ElementUtils elementUtils;
     protected WaitManager waitManager;
     protected Reports reports;
+    protected JavascriptUtils javascriptUtils;
 
     @BeforeClass
     public void setupOfFrameworkObject()
@@ -22,6 +23,7 @@ public class BaseClass {
         seleniumUtils = new SeleniumUtils(driver,elementUtils);
         waitManager = new WaitManager(driver);
         reports = new Reports(driver);
+        javascriptUtils = new JavascriptUtils(driver);
     }
 
     @BeforeMethod
