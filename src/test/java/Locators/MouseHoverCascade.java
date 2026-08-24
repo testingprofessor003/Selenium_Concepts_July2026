@@ -32,7 +32,8 @@ public class MouseHoverCascade extends BaseClass {
         }
 
         //Scrolling down the web page
-        ((JavascriptExecutor)driver).executeScript("window.scrollBy(0,200)");
+        //((JavascriptExecutor)driver).executeScript("window.scrollBy(0,200)");
+        javascriptUtils.scrollToPage(200);
 
         Actions a1=new Actions(driver);
         List<WebElement> cascadeHovers=elementUtils.findElements(By.xpath("//h4[text()='Cascading Hover']/following-sibling::div/div"));
