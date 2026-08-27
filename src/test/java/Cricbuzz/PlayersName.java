@@ -50,6 +50,7 @@ public class PlayersName extends BaseClass {
 
         for(int i=0;i< players.size();i++) {
 
+            wait.until(ExpectedConditions.elementToBeClickable(players.get(i)));
             players.get(i).click();
 
 
