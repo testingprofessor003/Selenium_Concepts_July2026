@@ -251,14 +251,6 @@ public class JavascriptUtils {
         return this;
     }
 
-    public void switchToWindowHandle(String handle) {
-        driver.switchTo().window(handle);
-    }
-
-    public Set<String> getAllWindowHandles() {
-        return driver.getWindowHandles();
-    }
-
     @SuppressWarnings("unchecked")
     public List<String> getAllLinks() {
         return (List<String>) js.executeScript(
