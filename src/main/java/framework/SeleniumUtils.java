@@ -17,10 +17,12 @@ public class SeleniumUtils {
     
     private WebDriver driver;
     private ElementUtils elementUtils;
+    private WaitManager waitManager;
 
-    public SeleniumUtils(WebDriver driver, ElementUtils elementUtils) {
+    public SeleniumUtils(WebDriver driver, ElementUtils elementUtils, WaitManager waitManager) {
         this.driver = driver;
         this.elementUtils = elementUtils;
+        this.waitManager = waitManager;
     }
 
     public SeleniumUtils launchApplication(String url) {
@@ -70,6 +72,7 @@ public class SeleniumUtils {
         }
         return this;
     }
+
     public SeleniumUtils performAction(SeleniumActions actions, By by, String... data)
     {
         switch (actions) {
@@ -80,9 +83,28 @@ public class SeleniumUtils {
         return this;
     }
 
+    public SeleniumUtils performAction(SeleniumActions actions, WebElement element, String... data)
+    {
+        switch (actions) {
+            case CLICK -> click(element);
+            case ENTER_DATA -> enterData(element,data[0]);
+            case DROPDOWN -> selectOptionFromDropDown(element,data);
+        }
+        return this;
+    }
+
     private SeleniumUtils click(By by)
     {
-        elementUtils.findElement(by).click();
+        if(waitManager.waitForElementClickable(by,10))
+        {
+            elementUtils.findElement(by).click();
+        }
+
+        else
+        {
+            throw new GenericExceptions("Element is not clickable for: "+by);
+        }
+
         return this;
     }
 
@@ -92,6 +114,26 @@ public class SeleniumUtils {
         return this;
     }
 
+    private SeleniumUtils click(WebElement element)
+    {
+        if(waitManager.waitForElementClickable(element,10))
+        {
+            element.click();
+        }
+
+        else
+        {
+            throw new GenericExceptions("Element is not clickable for: "+element);
+        }
+
+        return this;
+    }
+
+    private SeleniumUtils enterData(WebElement element, String data)
+    {
+        element.sendKeys(data);
+        return this;
+    }
     /*
         Accepting the Browser Based Alerts
      */
@@ -134,6 +176,39 @@ public class SeleniumUtils {
     private SeleniumUtils selectOptionFromDropDown(By by,String... option)
     {
         Select s1=new Select(elementUtils.findElement(by));
+
+        if(option.length==0) //Selects a random option from the drop-down
+        {
+            List<WebElement> elements=s1.getOptions();
+
+            int number= ThreadLocalRandom.current().nextInt(0,elements.size()-1);
+
+            s1.selectByIndex(number);
+        }
+
+        else
+        {
+            Arrays.asList(option).forEach(options-> {
+                if (s1.getOptions().stream().map(s -> s.getText()).filter(s -> s.equalsIgnoreCase(options))
+                        .findAny().isPresent()) {
+                    s1.selectByVisibleText(options);
+                } else if (s1.getOptions().stream().map(s -> s.getText()).filter(s -> s.contains(options)).findAny().isPresent()) {
+                    s1.selectByContainsVisibleText(options);
+                } else if (s1.getOptions().stream().map(s -> s.getAttribute("value")).filter(s -> s.equalsIgnoreCase(options)).findAny().isPresent()) {
+                    s1.selectByValue(options);
+                } else {
+                    s1.selectByIndex(Integer.parseInt(options));
+                }
+            });
+
+        }
+
+        return this;
+    }
+
+    private SeleniumUtils selectOptionFromDropDown(WebElement element,String... option)
+    {
+        Select s1=new Select(element);
 
         if(option.length==0) //Selects a random option from the drop-down
         {

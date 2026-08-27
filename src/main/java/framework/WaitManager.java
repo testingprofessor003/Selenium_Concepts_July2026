@@ -2,6 +2,7 @@ package framework;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,5 +28,123 @@ public class WaitManager {
         {
             return false;
         }
+    }
+
+    public boolean waitForPresenceOfElements(By by, int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean waitForElementClickable(By by, int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.elementToBeClickable(by));
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+
+    public boolean waitForElementClickable(WebElement element, int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean waitForTextContains(String text, int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("body"),text));
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean waitForTextIsPresentOrNot(String text, By by, int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.textToBe(by, text));
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean waitForInvisibleElement(By by, int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean waitForPresenceOfAlert(int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.alertIsPresent());
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean checkWhetherPageIsLoaded(int sec)
+    {
+//        try
+//        {
+//            ExpectedConditions
+//            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+//            wait.until()
+//        }
+
+        return false;
     }
 }
