@@ -147,4 +147,34 @@ public class WaitManager {
 
         return false;
     }
+
+    public boolean checkForPresenceForFrame(String frameName, int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameName));
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            throw new GenericExceptions("Frame " + frameName + " not found");
+        }
+    }
+
+    public boolean checkForPresenceForFrame(WebElement frames, int sec)
+    {
+        try
+        {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frames));
+            return true;
+        }
+
+        catch(Exception e)
+        {
+            throw new GenericExceptions("Frame " + frames.toString() + " not found");
+        }
+    }
 }

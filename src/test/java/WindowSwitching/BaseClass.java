@@ -20,9 +20,9 @@ public class BaseClass {
     public void setupOfFrameworkObject()
     {
         driver = BrowserUtils.getDriver(BrowserTypes.CHROME);
-        elementUtils = new ElementUtils(driver);
-        seleniumUtils = new SeleniumUtils(driver,elementUtils);
         waitManager = new WaitManager(driver);
+        elementUtils = new ElementUtils(driver,waitManager);
+        seleniumUtils = new SeleniumUtils(driver,elementUtils,waitManager);
         reports = new Reports(driver);
         javascriptUtils = new JavascriptUtils(driver);
 

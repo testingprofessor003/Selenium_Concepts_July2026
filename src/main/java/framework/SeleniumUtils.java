@@ -110,7 +110,7 @@ public class SeleniumUtils {
 
     private SeleniumUtils enterData(By by, String data)
     {
-        elementUtils.findElement(by).sendKeys(data);
+        elementUtils.findElement(by,10).sendKeys(data);
         return this;
     }
 
@@ -175,7 +175,7 @@ public class SeleniumUtils {
 
     private SeleniumUtils selectOptionFromDropDown(By by,String... option)
     {
-        Select s1=new Select(elementUtils.findElement(by));
+        Select s1=new Select(elementUtils.findElement(by,10));
 
         if(option.length==0) //Selects a random option from the drop-down
         {
@@ -238,6 +238,32 @@ public class SeleniumUtils {
 
         return this;
     }
+
+    public SeleniumUtils switchOutOfAllFrames()
+    {
+        driver.switchTo().defaultContent();
+        return this;
+    }
+
+    public SeleniumUtils switchToParentFrame()
+    {
+        driver.switchTo().parentFrame();
+        return this;
+    }
+
+    public String getElementText(By by)
+    {
+        return elementUtils.findElement(by,10).getText().trim();
+    }
+
+    public String getElementText(WebElement element)
+    {
+        return element.getText().trim();
+    }
+
+
+
+
 
 
 
